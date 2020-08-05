@@ -14,7 +14,7 @@ export async function up(knex: Knex){
 
         //quando entrou em contato
         table.timestamp('created_at')
-            .defaultTo('now()')
+            .defaultTo(knex.raw('CURRENT_TIMESTAMP'))
             .notNullable();
     });
 }
