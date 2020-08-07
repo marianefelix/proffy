@@ -1,6 +1,8 @@
 #page-teacher-list{
     width: 100vw;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 #search-teachers{
@@ -37,6 +39,21 @@
     width: 90%;
 }
 
+#page-teacher-list main .error-message, #page-teacher-list main .teacher-not-found{
+    margin: 0 auto;
+    font-weight: 600;
+    text-align: center;
+}
+
+#page-teacher-list main .error-message{
+    width: 34rem;
+    color: red;
+}
+#page-teacher-list main .teacher-not-found{
+    width: 25rem;
+    font-style: italic;
+}
+
 @media(min-width: 700px){
     #search-teachers{
         display: grid;
@@ -55,6 +72,9 @@
         padding: 3.2rem 0;
         max-width: 740px;
         margin: 0 auto;
+    }
+    #page-teacher-list main .error-message, #page-teacher-list main .teacher-not-found{
+        margin: 3.2rem auto;
     }
 
 }

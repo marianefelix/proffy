@@ -14,26 +14,43 @@ function TeacherList(){
     const [subject, setSubject] = useState('');
     const [week_day, setWeek_day] = useState('');
     const [time, setTime] = useState('');
+    const [teacherNotFound, setTeacherNotFound] = useState('');
+    const [error, setError] = useState('');
 
     async function handleSearchTeachers(e: FormEvent){
         //previne o comportamento padrao do form
         e.preventDefault(); 
 
-        //busca o proffy e todas as suas infos cadastradas
-        //passando como parametro a materia, dia da semana e o horario
-       const response = await api.get('classes', {
-            params: {
-                subject,
-                week_day,
-                time
+        setTeacherNotFound('');
+        setError('');
+        
+        try{
+            //busca o proffy e todas as suas infos cadastradas
+           //passando como parametro a materia, dia da semana e o horario
+            const response = await api.get('classes', {
+                params: {
+                    subject,
+                    week_day,
+                    time
+                }
+            });
+
+            //seta os dados da resposta no array teacher
+            setTeachers(response.data);
+
+            //verifica se a resposta eh vazia, 
+            //se for, seta uma mensagem 
+            if(response.data.length === 0){
+                setTeacherNotFound('Nenhum proffy encontrado');
             }
-        });
 
-        //seta os dados da resposta no array teachers
-        setTeachers(response.data);
+        } catch(err){
+            if(err.response.status === 400){
+                setError(err.response.data.message);
+            }
 
-        //fazer a parte de mostrar erro, 
-        //quando os parametros forem vazios
+            //console.log(err.response.status);
+        }
     }
 
     return(
@@ -80,14 +97,30 @@ function TeacherList(){
             </PageHeader>
 
             <main>
+                {//se error nao for vazio, ele sera mostrado na pagina
+                error && (
+                    <div className="error-message"> 
+                        {error}
+                    </div>
+                )}
                 {/* perccorre o array teachers, 
                 e para cada item passa um objeto para TeacherItem 
                 e retorna todas as infos do teacher */}
                 {teachers.map((teacher: Teacher) => {
                     return <TeacherItem  key={teacher.id} teacher= {teacher} />;
                 })}
-                
+
+                {//se teacheNotFound no for vazio, mostrar mensagem na pagina
+                teacherNotFound && 
+                <div className="teacher-not-found">
+                    <span>
+                        {teacherNotFound}
+                    </span>
+                </div>
+                }
+
             </main>
+            
         </div>
     )
 }

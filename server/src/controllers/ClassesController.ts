@@ -21,7 +21,7 @@ export default class ClassesController {
         //caso nao tenha algum desses parametros, retorna um erro
         if(!filters.week_day || !filters.subject || !filters.time){
             return response.status(400).json({
-                error: 'Missing filters to search classes'
+                message: 'Todos os campos devem ser preenchidos!'
             });
         }
 
