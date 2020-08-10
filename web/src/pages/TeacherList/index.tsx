@@ -1,4 +1,6 @@
 import React, { useState, FormEvent } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import PageHeader from '../../components/PageHeader';
 import TeacherItem, { Teacher } from '../../components/TeacherItem';
@@ -8,6 +10,7 @@ import Select from '../../components/Select';
 import api from '../../services/api';
 
 import './styles.css';
+import Loading from '../../components/Loading';
 
 function TeacherList(){
     const [teachers, setTeachers] = useState([]);
@@ -16,6 +19,7 @@ function TeacherList(){
     const [time, setTime] = useState('');
     const [teacherNotFound, setTeacherNotFound] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     async function handleSearchTeachers(e: FormEvent){
         //previne o comportamento padrao do form
@@ -24,9 +28,11 @@ function TeacherList(){
         setTeacherNotFound('');
         setError('');
         
+        setLoading(true);
         try{
             //busca o proffy e todas as suas infos cadastradas
            //passando como parametro a materia, dia da semana e o horario
+
             const response = await api.get('classes', {
                 params: {
                     subject,
@@ -44,17 +50,25 @@ function TeacherList(){
                 setTeacherNotFound('Nenhum proffy encontrado');
             }
 
-        } catch(err){
-            if(err.response.status === 400){
-                setError(err.response.data.message);
-            }
+            setLoading(false);
 
+        } catch(err){
+            if(err.response){
+                if(err.response.data.message)
+                   setError(err.response.data.message);
+            }
+            toast.error('Erro ao buscar proffys. Tente novamente');
+            
+            setLoading(false);
+            
             //console.log(err.response.status);
         }
     }
 
     return(
         <div id="page-teacher-list" className="container">
+            <ToastContainer />
+
             <PageHeader title="Esses são os proffys disponíveis">
                 <form id="search-teachers" onSubmit={handleSearchTeachers}>
                     <Select 
@@ -120,7 +134,7 @@ function TeacherList(){
                 }
 
             </main>
-            
+            <Loading value={loading} />
         </div>
     )
 }

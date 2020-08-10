@@ -13,6 +13,7 @@ import Select from '../../components/Select';
 import warningIcon from '../../assets/images/icons/warning.svg';
 
 import './styles.css';
+import Loading from '../../components/Loading';
 
 function TeacherForm(){
     const [name, setName] = useState('');
@@ -311,12 +312,13 @@ function TeacherForm(){
                     </footer>
 
                 </form>
-                {loading && (
+                {/*loading && (
                     <div className="loading">
                         <div></div>
                         <p>carregando...</p>
                     </div>
-                )}
+                )*/}
+                <Loading value={loading} />
             </main>
         </div>
     )
