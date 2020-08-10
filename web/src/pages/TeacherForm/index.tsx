@@ -29,6 +29,8 @@ function TeacherForm(){
     const [errorAvatar, setErrorAvatar] = useState('');
     const [errorWhatsapp, setErrorWhatsapp] = useState('');
     const [errorCost, setErrorCost] = useState('');
+    const [loading, setLoading] = useState(false);
+
     var formIsValid = true;
 
     /*const [errors, setErrors] = useState({
@@ -143,6 +145,8 @@ function TeacherForm(){
         validateFormValues();
         
         if(formIsValid){
+            setLoading(true);
+
             api.post('classes', {
                 name, 
                 avatar,
@@ -152,6 +156,8 @@ function TeacherForm(){
                 cost: Number(cost),
                 schedule: scheduleItems
             }).then(() => { 
+                setLoading(false);
+
                 backToTop();
                 
                 toast.success('Cadastro realizado com sucesso! Você será redirecionado pra página inicial.');
@@ -159,6 +165,8 @@ function TeacherForm(){
                 backToHome();
 
             }).catch(() => {
+                setLoading(false);
+
                 toast.error('Erro ao realizar o cadastro. Tente novamente.');
                 backToTop();
             })
@@ -303,6 +311,12 @@ function TeacherForm(){
                     </footer>
 
                 </form>
+                {loading && (
+                    <div className="loading">
+                        <div></div>
+                        <p>carregando...</p>
+                    </div>
+                )}
             </main>
         </div>
     )
