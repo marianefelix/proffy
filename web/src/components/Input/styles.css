@@ -23,7 +23,7 @@
 }
 
 
-.input-block:focus-within::after{
+/*.input-block:focus-within::after{
     width: calc(100% - 3.2rem);
     height: 2px;
     content: '';
@@ -32,4 +32,13 @@
     left: 1.6rem;
     right: 1.6rem;
     bottom: 0;
+}*/
+
+.input-block:focus-within input{
+    border-bottom: 2px solid var(--color-primary-light);
+}
+
+.input-block span{
+    font-size: 1.4rem;
+    color: red;
 }

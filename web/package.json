@@ -39,6 +39,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.5"
+    "@types/react-router-dom": "^5.1.5",
+    "react-toastify": "^6.0.8"
   }
 }

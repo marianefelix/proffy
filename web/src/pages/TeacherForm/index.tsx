@@ -1,5 +1,9 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'; 
+
+import api from '../../services/api';
 
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
@@ -9,7 +13,6 @@ import Select from '../../components/Select';
 import warningIcon from '../../assets/images/icons/warning.svg';
 
 import './styles.css';
-import api from '../../services/api';
 
 function TeacherForm(){
     const [name, setName] = useState('');
@@ -22,6 +25,36 @@ function TeacherForm(){
         { week_day: 0, from: '', to: ''}
     ]);
     const history = useHistory();
+    const [errorMessage, setErrorMessage] = useState('');
+    const [errorAvatar, setErrorAvatar] = useState('');
+    const [errorWhatsapp, setErrorWhatsapp] = useState('');
+    const [errorCost, setErrorCost] = useState('');
+    var formIsValid = true;
+
+    /*const [errors, setErrors] = useState({
+        message: '',
+        avatar: '', 
+        whatsapp: '',
+        cost: '', 
+        formIsValid: true
+    });*/
+
+
+    useEffect(() => {
+        backToTop()
+    }, []);
+
+    function backToTop(){
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+    }
+
+    function backToHome(){
+        //redireciona pra landing page apos 5s
+
+        setTimeout(() => {
+            history.push('/')
+        }, 5000);
+    }
 
     function addNewScheduleItem(){
         //copia o que ja tinha no array de schedule e seta os novos valores no array
@@ -47,38 +80,112 @@ function TeacherForm(){
         setscheduleItems(updateScheduleItems);
     }
 
+    function validateFormValues(){
+        setErrorMessage('');
+        setErrorAvatar('');
+        setErrorWhatsapp('');
+        setErrorCost('');
+        formIsValid = true;
+        
+        //busca o campo from ou to, caso algum seja vazio
+        const found = scheduleItems.find(
+            scheduleItem => scheduleItem.from === '' || scheduleItem.to === ''
+        );
+        
+        //verifica se algum destes campos eh vazio
+        if(!name || !avatar || !whatsapp || !bio || !subject || !cost){
+            setErrorMessage('Todos os campos devem ser preenchidos!');
+            formIsValid = false;
+        }
+        
+        //verifica se found nao eh vazio
+        //se nao for, eh porque algum campo do shedule items eh vazio
+        if(found){
+            setErrorMessage('Todos os campos devem ser preenchidos!');
+            formIsValid = false;
+            //console.log(found);
+            //console.log(errors.formIsValid);
+        }
+
+        if(formIsValid){
+            let regexNumbers = /^[0-9]+$/;
+            let regexUrl = /(https?:\/\/[^\s]+)/g;
+
+            //verifica se campo whatsapp nao tem apenas numeros
+            if(!whatsapp.match(regexNumbers) || (whatsapp.length < 8 || whatsapp.length > 9)){
+                setErrorWhatsapp('Campo inválido! Seu WhatsApp deve conter no máx. 9 números.');
+                formIsValid = false;
+
+                //retira qualquer caractere que nao seja numero
+                //setWhatsapp(whatsapp.replace(/[^0-9]/g, ""));
+            }
+
+            if(!cost.match(regexNumbers)){
+                setErrorCost('Campo inválido! Digite apenas números.');
+                formIsValid = false;
+
+                //setCost(cost.replace(/[^0-9]/g, ""));
+            }
+
+            if(!avatar.match(regexUrl)){
+                setErrorAvatar('Campo inválido! Digite uma url válida.');
+                formIsValid = false;
+            }
+        }
+
+        //setErrors(errors);        
+    }
+
     function handleCreateClass(e: FormEvent){
         //previne comportamento padrao do form
         e.preventDefault();
 
-        api.post('classes', {
-            name, 
-            avatar,
-            whatsapp,
-            bio,
-            subject,
-            cost: Number(cost),
-            schedule: scheduleItems
-        }).then(() => { 
-            alert('Cadastro realizado com sucesso!');
-            history.push('/');
-        }).catch(() => {
-            alert('Deu ruim!');
-        })
+        validateFormValues();
+        
+        if(formIsValid){
+            api.post('classes', {
+                name, 
+                avatar,
+                whatsapp,
+                bio,
+                subject,
+                cost: Number(cost),
+                schedule: scheduleItems
+            }).then(() => { 
+                backToTop();
+                
+                toast.success('Cadastro realizado com sucesso! Você será redirecionado pra página inicial.');
 
+                backToHome();
+
+            }).catch(() => {
+                toast.error('Erro ao realizar o cadastro. Tente novamente.');
+                backToTop();
+            })
+        }
+        else{
+            backToTop();
+        }
     }
+
 
     return(
         <div id="page-teacher-form" className="container">
+            <ToastContainer />
+
             <PageHeader 
                 title="Que incrível que você quer dar aulas."
                 description= "O primeiro passo é preencher esse formulário de inscrição"
             />
+            
             <main>
                 <form onSubmit={handleCreateClass}>
                     <fieldset>
                         <legend>Seus dados</legend>
-
+                        { errorMessage && 
+                            <p style={{color: 'red', marginBottom: '2.4rem'}}>{errorMessage}</p>
+                        }
+                    
                         <Input 
                             name="name" 
                             label="Nome completo"
@@ -88,13 +195,16 @@ function TeacherForm(){
                         <Input 
                             name="avatar" 
                             label="Avatar"
+                            error= {errorAvatar && (errorAvatar)}
                             value={avatar}
                             onChange={(e) => {setAvatar(e.target.value)}}
+                            placeholder="http(s)://example.com/my-picture"
                         />
                         <Input 
                             name="whatsapp" 
                             label="WhatsApp"
                             value={whatsapp}
+                            error= {errorWhatsapp && (errorWhatsapp)}
                             onChange={(e) => {setWhatsapp(e.target.value)}}
                         />
                         <Textarea 
@@ -125,57 +235,59 @@ function TeacherForm(){
                             name="cost" 
                             label="Custo da sua hora por aula"
                             value={cost}
+                            error= {errorCost && (errorCost)}
                             onChange={(e) => {setCost(e.target.value)}}
                         />
                     
                     </fieldset>
 
                     <fieldset>
-                            <legend>
-                                Horários disponíveis
-                                <button type="button" onClick={addNewScheduleItem}>
-                                    + Novo horário
-                                </button>
-                            </legend>
-                            {
-                                //percorre o array de schedule items 
-                                //e retorna um schedule item para cada objeto do array
-                                scheduleItems.map((scheduleItem, index) => {
-                                    return(
-                                        <div key={scheduleItem.week_day} className="schedule-item">
-                                            <Select 
-                                                name="week_day" 
-                                                label="Dia da semana"
-                                                value={scheduleItem.week_day}
-                                                onChange={e => {setSheduleItemValue(index, 'week_day', e.target.value)}}
-                                                options={[
-                                                    { value: '0', label: 'Domingo'},
-                                                    { value: '1', label: 'Segunda-feira'},
-                                                    { value: '2', label: 'Terça-feira'},
-                                                    { value: '3', label: 'Quarta-feira'}, 
-                                                    { value: '4', label: 'Quinta-feira'},  
-                                                    { value: '5', label: 'Sexta-feira'},    
-                                                    { value: '6', label: 'Sábado'},                            
-                                                ]}
-                                            />
-                                            <Input 
-                                                name="from" 
-                                                label="Das" 
-                                                value={scheduleItem.from}
-                                                type="time" 
-                                                onChange={e => {setSheduleItemValue(index, 'from', e.target.value)}}
-                                            />
-                                            <Input 
-                                                name="to" 
-                                                label="Até" 
-                                                value={scheduleItem.to}
-                                                type="time" 
-                                                onChange={e => {setSheduleItemValue(index, 'to', e.target.value)}}
-                                            />
-                                        </div>
-                                    );
-                                })
-                            }
+                        <legend>
+                            Horários disponíveis
+                            <button type="button" onClick={addNewScheduleItem}>
+                                + Novo horário
+                            </button>
+                        </legend>
+                        
+                        {
+                            //percorre o array de schedule items 
+                            //e retorna um schedule item para cada objeto do array
+                            scheduleItems.map((scheduleItem, index) => {
+                                return(
+                                    <div key={scheduleItem.week_day} className="schedule-item">
+                                        <Select 
+                                            name="week_day" 
+                                            label="Dia da semana"
+                                            value={scheduleItem.week_day}
+                                            onChange={e => {setSheduleItemValue(index, 'week_day', e.target.value)}}
+                                            options={[
+                                                { value: '0', label: 'Domingo'},
+                                                { value: '1', label: 'Segunda-feira'},
+                                                { value: '2', label: 'Terça-feira'},
+                                                { value: '3', label: 'Quarta-feira'}, 
+                                                { value: '4', label: 'Quinta-feira'},  
+                                                { value: '5', label: 'Sexta-feira'},    
+                                                { value: '6', label: 'Sábado'},                            
+                                            ]}
+                                        />
+                                        <Input 
+                                            name="from" 
+                                            label="Das" 
+                                            value={scheduleItem.from}
+                                            type="time" 
+                                            onChange={e => {setSheduleItemValue(index, 'from', e.target.value)}}
+                                        />
+                                        <Input 
+                                            name="to" 
+                                            label="Até" 
+                                            value={scheduleItem.to}
+                                            type="time" 
+                                            onChange={e => {setSheduleItemValue(index, 'to', e.target.value)}}
+                                        />
+                                    </div>
+                                );
+                            })
+                        }
                             
                     </fieldset>
 

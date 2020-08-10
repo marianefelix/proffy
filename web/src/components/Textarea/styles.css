@@ -28,7 +28,7 @@ textarea:focus{
     outline: 0;
 }
 
-.textarea-block:focus-within::after{
+/*.textarea-block:focus-within::after{
     width: calc(100% - 3.2rem);
     height: 2px;
     content: '';
@@ -37,4 +37,8 @@ textarea:focus{
     left: 1.6rem;
     right: 1.6rem;
     bottom: 7px;
+}*/
+
+.textarea-block:focus-within textarea{
+    border-bottom: 2px solid var(--color-primary-light);
 }

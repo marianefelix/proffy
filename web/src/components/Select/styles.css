@@ -22,8 +22,11 @@
     font: 1.6rem Archivo;
 }
 
+.select-block select option{
+    color: var(--color-primary);
+}
 
-.select-block:focus-within::after{
+/*.select-block:focus-within::after{
     width: calc(100% - 3.2rem);
     height: 2px;
     content: '';
@@ -32,4 +35,8 @@
     left: 1.6rem;
     right: 1.6rem;
     bottom: 0;
+}*/
+
+.select-block:focus-within select{
+    border-bottom: 2px solid var(--color-primary-light);
 }
