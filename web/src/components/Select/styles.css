@@ -20,10 +20,7 @@
     outline: 0;
     padding: 0 1.6rem;
     font: 1.6rem Archivo;
-}
 
-.select-block select option{
-    color: var(--color-primary);
 }
 
 /*.select-block:focus-within::after{

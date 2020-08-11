@@ -58,3 +58,7 @@ textarea{
         font-size: 62.5%;
     }
 }
+
+button{
+    outline: 0;
+}
