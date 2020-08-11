@@ -1,6 +1,5 @@
-<p align="center">
-   <img src="https://user-images.githubusercontent.com/52718710/89372089-94173a00-d6bb-11ea-940c-f9f919fdb83c.png" alt="Proffy" width="280"/>
-</p>
+<a href="https://proffywebapp.vercel.app/" target="_blank">
+</a>
 
 <p align="center">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/marianefelix/NLW2.svg">
@@ -20,7 +19,7 @@
 </p>
 
 ## Sobre
-Projeto desenvolvido durante a Next Level Week #2 da [Rocketseat](https://rocketseat.com.br/). Proffy é uma aplicação web com o intuito de facilitar o contato entre professores e alunos.
+Projeto desenvolvido durante a Next Level Week #2 da [Rocketseat](https://rocketseat.com.br/). Proffy é uma aplicação web com o intuito de facilitar o contato entre professores e alunos. Para acessar, [clique aqui](https://proffywebapp.vercel.app/)
 
 ## Tecnologias utilizadas
 
@@ -30,6 +29,7 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 - [ReactJS](https://reactjs.org/)
 - [Typescript](https://www.typescriptlang.org/)
 - [React Router](https://github.com/ReactTraining/react-router)
+- [React Toastify](https://github.com/fkhadra/react-toastify)
 
 ### 📦 API
 - [NodeJS](https://nodejs.org/en/)
