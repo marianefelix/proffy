@@ -79,11 +79,12 @@ function TeacherList(){
                         value={subject}
                         onChange={(e) => {setSubject(e.target.value)}}
                         options={[
-                            { value: 'Português', label: 'Português'},
-                            { value: 'Matemática', label: 'Matemática'},
-                            { value: 'Ciências', label: 'Ciências'},
-                            { value: 'Geografia', label: 'Geografia'}, 
-                            { value: 'História', label: 'História'},                            
+                            { value: 'Lógica e Algoritmos', label: 'Lógica e Algoritmos'}
+                            //,
+                            //{ value: 'Matemática', label: 'Matemática'},
+                            //{ value: 'Ciências', label: 'Ciências'},
+                            //{ value: 'Geografia', label: 'Geografia'}, 
+                            //{ value: 'História', label: 'História'},                            
                         ]}
                     />
                     <Select 
