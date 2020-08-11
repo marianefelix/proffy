@@ -1,4 +1,7 @@
 <a href="https://proffywebapp.vercel.app/" target="_blank">
+  <p align="center">
+    <img src="https://user-images.githubusercontent.com/52718710/89372089-94173a00-d6bb-11ea-940c-f9f919fdb83c.png" alt="Proffy" width="280"/>
+  </p>
 </a>
 
 <p align="center">
