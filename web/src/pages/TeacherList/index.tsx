@@ -57,7 +57,9 @@ function TeacherList(){
                 if(err.response.data.message)
                    setError(err.response.data.message);
             }
-            toast.error('Erro ao buscar proffys. Tente novamente');
+            else{
+                toast.error('Erro ao buscar proffys. Tente novamente');
+            }
             
             setLoading(false);
             
