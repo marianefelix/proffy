@@ -33,10 +33,10 @@ export default class ClassesController {
             .whereExists(function() {
                 this.select('class_schedule.*')
                     .from('class_schedule')
-                    .whereRaw('`class_schedule`. `class_id` = `classes`. `id`')
-                    .whereRaw('`class_schedule`. `week_day` = ??', [Number(week_day)])
-                    .whereRaw('`class_schedule`. `from` <= ??', [timeInMinutes])
-                    .whereRaw('`class_schedule`. `to` > ??', [timeInMinutes])
+                    .whereRaw('class_schedule.class_id = classes.id')
+                    .whereRaw('class_schedule.week_day = ??', [Number(week_day)])
+                    .whereRaw('class_schedule.from <= ??', [timeInMinutes])
+                    .whereRaw('class_schedule.to > ??', [timeInMinutes])
             })
             .where('classes.subject', '=', subject)
             //realiza inner join com a tabela de users para retornar todos os seus dados
@@ -70,7 +70,7 @@ export default class ClassesController {
                 avatar, 
                 whatsapp,
                 bio,
-            });
+            }).returning('id');
         
             //recupera id do usuario registrado
             const user_id = insertedUsersIds[0];
@@ -80,7 +80,7 @@ export default class ClassesController {
                 subject,
                 cost,
                 user_id,
-            });
+            }).returning('id');
         
             //recupera id da aula registrada
             const class_id = insertedClassesIds[0];
