@@ -39,7 +39,6 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 - [Typescript](https://www.typescriptlang.org/)
 - [Express](https://expressjs.com/)
 - [KnexJS](http://knexjs.org/)
-- [SQLite 3](https://www.npmjs.com/package/sqlite3)
 - [PostgreSQL](https://www.postgresql.org/)
 
 
