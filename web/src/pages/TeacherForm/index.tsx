@@ -227,7 +227,7 @@ function TeacherForm(){
                     <fieldset>
                         <legend>Sobre a aula</legend>
 
-                        {/*<Select 
+                        <Select 
                             name="subject" 
                             label="Matéria"
                             value={subject}
@@ -239,13 +239,8 @@ function TeacherForm(){
                                 { value: 'Geografia', label: 'Geografia'}, 
                                 { value: 'História', label: 'História'},                            
                             ]}
-                        />*/}
-                        <Input
-                            name="subject" 
-                            label="Matéria"
-                            value={subject}
-                            onChange={(e) => {setSubject(e.target.value)}}
                         />
+                
                         <Input 
                             name="cost" 
                             label="Custo da sua hora por aula"
