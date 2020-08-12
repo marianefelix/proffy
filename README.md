@@ -22,7 +22,7 @@
 </p>
 
 ## Sobre
-Projeto desenvolvido durante a Next Level Week #2 da [Rocketseat](https://rocketseat.com.br/). Proffy é uma aplicação web com o intuito de facilitar o contato entre professores e alunos. Para acessar, [clique aqui](https://proffywebapp.vercel.app/)
+Projeto desenvolvido durante a Next Level Week #2 da [Rocketseat](https://rocketseat.com.br/). Proffy é uma aplicação web com o intuito de facilitar o contato entre professores e alunos do ensino fundamental. Para acessar, [clique aqui](https://proffywebapp.vercel.app/)
 
 ## Tecnologias utilizadas
 
