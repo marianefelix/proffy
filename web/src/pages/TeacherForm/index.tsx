@@ -9,11 +9,11 @@ import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 import Textarea from '../../components/Textarea';
 import Select from '../../components/Select';
+import Loading from '../../components/Loading';
 
 import warningIcon from '../../assets/images/icons/warning.svg';
 
 import './styles.css';
-import Loading from '../../components/Loading';
 
 function TeacherForm(){
     const [name, setName] = useState('');
@@ -53,7 +53,6 @@ function TeacherForm(){
 
     function backToHome(){
         //redireciona pra landing page apos 5s
-
         setTimeout(() => {
             history.push('/')
         }, 5000);
@@ -158,6 +157,21 @@ function TeacherForm(){
                 schedule: scheduleItems
             }).then(() => { 
                 setLoading(false);
+
+                setName('');
+                setAvatar('');
+                setBio('');
+                setWhatsapp('');
+                setSubject('');
+                setCost('');
+                setscheduleItems([
+                    {
+                        week_day: 0, 
+                        from: '', 
+                        to: ''
+                    }
+                ]);
+
 
                 backToTop();
                 
