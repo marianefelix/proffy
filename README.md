@@ -5,12 +5,12 @@
 </a>
 
 <p align="center">
-  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/marianefelix/NLW2.svg">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/marianefelix/proffy.svg">
 
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/marianefelix/NLW2.svg">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/marianefelix/proffy.svg">
 
-  <a href="https://github.com/marianefelix/NLW2/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/marianefelix/NLW2.svg">
+  <a href="https://github.com/marianefelix/proffy/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/marianefelix/proffy.svg">
   </a>
 </p>
 
@@ -48,9 +48,9 @@ Execute os seguintes comandos no seu terminal:
 
 ```bash
 # Clone o repositório
-$ git clone https://github.com/marianefelix/NLW2.git
+$ git clone https://github.com/marianefelix/proffy.git
 # Entre no repositório
-$ cd NLW2
+$ cd proffy
 ```
 
 ### 📦 API
