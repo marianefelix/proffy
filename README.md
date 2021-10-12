@@ -17,6 +17,7 @@
 <p align="center">
   <a href="#sobre">Sobre</a> •
   <a href="#tecnologias-utilizadas">Tecnologias utilizadas</a> • 
+  <a href="#o-que-foi-aprendido">O que foi aprendido</a> • 
   <a href="#como-rodar">Como rodar?</a> • 
   <a href="#autora">Autora</a>
 </p>
@@ -46,6 +47,7 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 - Validação de formulário;
 - Resposividade;
 - JavaScript no HTML;
+- Backend com NodeJS
 
 ## Como rodar?
 
