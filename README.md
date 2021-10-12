@@ -22,7 +22,7 @@
 </p>
 
 ## Sobre
-Projeto desenvolvido durante a Next Level Week #2 da [Rocketseat](https://rocketseat.com.br/). Proffy é uma aplicação web com o intuito de facilitar o contato entre professores e alunos do ensino fundamental. Para acessar, [clique aqui](https://proffywebapp.vercel.app/)
+Projeto desenvolvido durante a Next Level Week #2 da [Rocketseat](https://rocketseat.com.br/). [Proffy](https://proffywebapp.vercel.app/) é uma aplicação web com o intuito de facilitar o contato entre professores e alunos do ensino fundamental.
 
 ## Tecnologias utilizadas
 
@@ -41,6 +41,11 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 - [KnexJS](http://knexjs.org/)
 - [PostgreSQL](https://www.postgresql.org/)
 
+## O que foi aprendido
+- TypeScript;
+- Validação de formulário;
+- Resposividade;
+- JavaScript no HTML;
 
 ## Como rodar?
 
@@ -59,9 +64,9 @@ $ cd proffy
 # Entre na pasta do servidor
 $ cd server
 # Instale as dependências
-$ npm install || yarn install 
+$ yarn install 
 # Execute a aplicação
-$ npm run dev || yarn dev 
+$ yarn dev
 ```
 
 Acesse a API em http://localhost:3333/
@@ -72,9 +77,9 @@ Acesse a API em http://localhost:3333/
 # Entre na pasta web
 $ cd web
 # Instale as dependências
-$ npm install || yarn install 
+$ yarn install 
 # Execute a aplicação
-$ npm run start || yarn start 
+$ yarn start 
 ```
 
 Acesse em seu navegador http://localhost:3000/ para ver o resultado.
