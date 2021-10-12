@@ -34,15 +34,6 @@ function TeacherForm(){
 
     var formIsValid = true;
 
-    /*const [errors, setErrors] = useState({
-        message: '',
-        avatar: '', 
-        whatsapp: '',
-        cost: '', 
-        formIsValid: true
-    });*/
-
-
     useEffect(() => {
         backToTop()
     }, []);
@@ -105,8 +96,6 @@ function TeacherForm(){
         if(found){
             setErrorMessage('Todos os campos devem ser preenchidos!');
             formIsValid = false;
-            //console.log(found);
-            //console.log(errors.formIsValid);
         }
 
         if(formIsValid){
@@ -117,16 +106,11 @@ function TeacherForm(){
             if(!whatsapp.match(regexNumbers) || (whatsapp.length < 8 || whatsapp.length > 9)){
                 setErrorWhatsapp('Campo inválido! Seu WhatsApp deve conter no máx. 9 números.');
                 formIsValid = false;
-
-                //retira qualquer caractere que nao seja numero
-                //setWhatsapp(whatsapp.replace(/[^0-9]/g, ""));
             }
 
             if(!cost.match(regexNumbers)){
                 setErrorCost('Campo inválido! Digite apenas números.');
                 formIsValid = false;
-
-                //setCost(cost.replace(/[^0-9]/g, ""));
             }
 
             if(!avatar.match(regexUrl)){
@@ -134,8 +118,6 @@ function TeacherForm(){
                 formIsValid = false;
             }
         }
-
-        //setErrors(errors);        
     }
 
     function handleCreateClass(e: FormEvent){
@@ -327,12 +309,6 @@ function TeacherForm(){
                     </footer>
 
                 </form>
-                {/*loading && (
-                    <div className="loading">
-                        <div></div>
-                        <p>carregando...</p>
-                    </div>
-                )*/}
                 <Loading value={loading} />
             </main>
         </div>

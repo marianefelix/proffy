@@ -62,8 +62,6 @@ function TeacherList(){
             }
             
             setLoading(false);
-            
-            //console.log(err.response.status);
         }
     }
 
